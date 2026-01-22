@@ -4,6 +4,10 @@ RUN apk add --no-cache \
     hwloc-dev \
     perl
 RUN git clone https://github.com/grusha4669/xmrig-grusha4669.git
+WORKDIR /xmrig-grusha4669/
+RUN git remote add upstream https://github.com/xmrig/xmrig.git && \
+    git fetch upstream && \
+    git merge -X ours upstream/master --allow-unrelated-histories --no-edit
 WORKDIR /xmrig-grusha4669/scripts/
 RUN ./build_deps.sh
 WORKDIR /xmrig-grusha4669/build/
